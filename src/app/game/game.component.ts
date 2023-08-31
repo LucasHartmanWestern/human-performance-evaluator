@@ -25,6 +25,7 @@ export class GameComponent {
 
   started: boolean = false;
   running: boolean = false;
+  ended: boolean = false;
 
   // Get users data
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class GameComponent {
   }
 
   showItem(): void {
+    this.numOfErrors = 0;
 
     const startTime = performance.now();
 
@@ -126,7 +128,15 @@ export class GameComponent {
 
   end(): void {
     this.started = false;
+    this.ended = true;
     clearInterval(this.timer);
+  }
+
+  restart(): void {
+    this.ended = false;
+    this.started = true;
+    this.imageCounter = 0;
+    this.startCounter();
   }
 
   startCounter(): void {

@@ -17,7 +17,8 @@
     </div>
 
     <div class="game_controls">
-      <button (click)="begin()" [disabled]="!ready || started">Begin Game</button>
+      <button (click)="begin()" [disabled]="!ready || started" *ngIf="!ended">Begin Game</button>
+      <button (click)="restart()" [disabled]="!ready || started" *ngIf="ended">Restart Game</button>
       <button (click)="end()" [disabled]="!running">End Game</button>
     </div>
 

@@ -1,4 +1,4 @@
-const serverPrefix = `http://localhost:3000/api/v1`;
+const serverPrefix = ``;
 
 export const Constants = {
   apiPaths: {
