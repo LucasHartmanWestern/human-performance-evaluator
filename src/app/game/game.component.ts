@@ -61,7 +61,9 @@ export class GameComponent {
     let button = document.getElementById('foundButton');
     button?.setAttribute('style', `width: calc(${this.image?.width} / ${img?.offsetWidth} * 100%); height: calc(${this.image?.height} / ${img?.offsetHeight} * 100%); top: calc(${this.image?.posY} / ${img?.offsetHeight} * 100%); left: calc(${this.image?.posX} / ${img?.offsetWidth} * 100%);`);
 
-    windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
+    setTimeout(() => {
+      windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
+    }, 50);
   }
 
   found(event: any): void {
