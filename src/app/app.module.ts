@@ -8,12 +8,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbActiveModal, NgbModal, NgbModule, NgbPopover } from "@ng-bootstrap/ng-bootstrap";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MsToTimePipe } from './pipes/ms-to-time.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     InfoFormComponent,
-    GameComponent
+    GameComponent,
+    MsToTimePipe
   ],
   imports: [
     BrowserModule,

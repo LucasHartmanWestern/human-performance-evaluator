@@ -1,0 +1,48 @@
+.background {
+  z-index: 999;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 50%);
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    background: var(--background);
+    border-radius: 12px;
+    padding: 24px;
+    overflow-x: hidden;
+    opacity: 100%;
+    row-gap: 12px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: 1.1rem;
+      }
+
+      input, select {
+        border: 1px solid var(--secondary);
+        border-radius: 8px;
+        padding: 4px 8px;
+        font-size: 1.1rem;
+      }
+    }
+
+    input[type=submit] {
+      border: 1px solid var(--secondary);
+      border-radius: 8px;
+      margin: 24px 0 0 0;
+      background: var(--primary);
+    }
+  }
+}

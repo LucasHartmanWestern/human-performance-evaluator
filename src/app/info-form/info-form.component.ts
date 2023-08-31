@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormEndpointsService } from "../services/form-endpoints.service";
+import { FormData, UserInfo } from "../constants/common.enum"
 
 @Component({
   selector: 'app-info-form',
@@ -8,10 +9,12 @@ import { FormEndpointsService } from "../services/form-endpoints.service";
 })
 export class InfoFormComponent {
 
+  @Output() formSubmission = new EventEmitter<any>();
+
   constructor(private formEndpointsService: FormEndpointsService) { }
 
-  formData: { formItems: {value: string, type: string, options?: string[]}[] } | undefined;
-  savedFormData: {field: string, value: string}[] = [];
+  formData: FormData | undefined;
+  savedFormData: UserInfo[] = [];
 
   // Get users data
   ngOnInit(): void {
@@ -35,5 +38,6 @@ export class InfoFormComponent {
       this.savedFormData.push({field: input?.querySelector('input, select')?.name, value: input?.querySelector('input, select')?.value});
     }
     localStorage.setItem('userInfo', JSON.stringify(this.savedFormData));
+    this.formSubmission.emit(this.savedFormData);
   }
 }

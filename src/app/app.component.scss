@@ -5,10 +5,21 @@ $image-path: '/assets/images/';
   @media (min-width: 769px) {
     align-items: center;
   }
-  height: calc(100vh - 8px);
+  height: calc(100vh);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  @media (max-height: 700px) {
+    display: none;
+  }
+
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--secondary);
 }
 
 .main {
@@ -16,19 +27,26 @@ $image-path: '/assets/images/';
     margin-right: auto;
     margin-left: auto;
   }
-  width: 100%;
+  width: 95vw;
   max-width: 1700px;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
 
   div {
     padding: 24px;
-    border: 2px solid black;
   }
 
   .game {
-    min-height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    border: 1px solid var(--secondary);
+    border-radius: 12px;
   }
 }
 
@@ -40,7 +58,8 @@ footer {
   @media (max-width: 768px) {
     flex-direction: column !important;
     min-height: 166px !important;
-    width: calc(100% - 2px) !important;
+    width: calc(100%) !important;
+    margin-left: 0 !important;
 
     #socials {
       width: 100% !important;
@@ -51,7 +70,7 @@ footer {
     }
   }
 
-  overflow-x: hidden;
+  overflow: hidden;
   background: var(--primary);
   width: calc(100% + 20px);
   margin-left: -10px;

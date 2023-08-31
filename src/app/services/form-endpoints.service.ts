@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from "../constants/constants";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { catchError, map, Observable, throwError } from "rxjs";
+import { FormData } from "../constants/common.enum"
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class FormEndpointsService {
   });
 
   getFormData(): Observable<any> {
-    return this.http.get<any>(`${Constants.apiPaths.get_form_data}`, {headers: this.httpHeaders}).pipe(
-      map((data: any) => data),
+    return this.http.get<FormData>(`${Constants.apiPaths.get_form_data}`, {headers: this.httpHeaders}).pipe(
+      map((data: FormData) => data),
       catchError(this.handleError)
     );
   }

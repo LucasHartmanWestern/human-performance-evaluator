@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'hpe-frontend';
 
+  constructor() { }
+
   formData: any = localStorage.getItem('userInfo');
+  formSubmission: any;
+
+  ngOnInit(): void {
+  }
+
+  formSubmit(): void {
+    this.formData = localStorage.getItem('userInfo');
+  }
 }

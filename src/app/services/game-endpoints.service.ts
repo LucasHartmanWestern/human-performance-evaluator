@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from "../constants/constants";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { catchError, map, Observable, throwError } from "rxjs";
+import { GameEntry } from "../constants/common.enum"
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +18,15 @@ export class GameEndpointsService {
   userInfo: any = JSON.parse(localStorage.getItem('userInfo') || '{}');
 
   getFirstImage(): Observable<any> {
-    return this.http.get<any>(`${Constants.apiPaths.game}/begin`, {headers: this.httpHeaders}).pipe(
-      map((data: any) => data),
+    return this.http.get<GameEntry>(`${Constants.apiPaths.game}/begin`, {headers: this.httpHeaders}).pipe(
+      map((data: GameEntry) => data),
       catchError(this.handleError)
     );
   }
 
-  submitImage(time: string, numOfErrors: number): Observable<any> {
-    return this.http.post<any>(`${Constants.apiPaths.game}/next`, {time: time, numOfErrors: numOfErrors, userInfo: this.userInfo}, {headers: this.httpHeaders}).pipe(
-      map((data: any) => data),
+  submitImage(time: number, numOfErrors: number): Observable<any> {
+    return this.http.post<GameEntry>(`${Constants.apiPaths.game}/next`, {time: time, numOfErrors: numOfErrors, userInfo: this.userInfo}, {headers: this.httpHeaders}).pipe(
+      map((data: GameEntry) => data),
       catchError(this.handleError)
     );
   }
