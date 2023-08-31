@@ -56,11 +56,12 @@ export class GameComponent {
 
     let windowContainer = document.getElementById('window');
     let img = document.querySelector('img');
-    windowContainer?.setAttribute('style', `height: ${img?.offsetHeight}px; width: ${img?.offsetWidth}px;`);
+    //windowContainer?.setAttribute('style', `height: ${img?.offsetHeight}px; width: ${img?.offsetWidth}px;`);
 
     let button = document.getElementById('foundButton');
-    button?.setAttribute('style', `width: ${this.image?.width}px; height: ${this.image?.height}px; top: ${this.image?.posY}px; left: ${this.image?.posX}px; max-height: 100%; max-width: 100%;`);
+    button?.setAttribute('style', `width: calc(${this.image?.width} / ${img?.offsetWidth} * 100%); height: calc(${this.image?.height} / ${img?.offsetHeight} * 100%); top: calc(${this.image?.posY} / ${img?.offsetHeight} * 100%); left: calc(${this.image?.posX} / ${img?.offsetWidth} * 100%);`);
 
+    windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
   }
 
   found(event: any): void {
@@ -88,7 +89,7 @@ export class GameComponent {
       else
         this.image = {
           file: 'test_2.png',
-          posX: 46,
+          posX: 45,
           posY: 116,
           width: 24,
           height: 24,
