@@ -63,7 +63,7 @@ export class GameComponent {
 
     setTimeout(() => {
       windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
-    }, 50);
+    }, 10);
   }
 
   found(event: any): void {
@@ -111,7 +111,7 @@ export class GameComponent {
 
     setTimeout(() => {
       this.showItem();
-    }, 10);
+    }, 50);
   }
 
   mistake(): void {
