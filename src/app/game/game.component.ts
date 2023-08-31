@@ -127,6 +127,12 @@ export class GameComponent {
   }
 
   end(): void {
+    let textElement = document.getElementById('game_text_display');
+    if (textElement) textElement.textContent = `Completed ${this.imageCounter - 1} tests`;
+    textElement?.removeAttribute('class');
+
+    this.elapsedTime = 0;
+    this.running = false;
     this.started = false;
     this.ended = true;
     clearInterval(this.timer);
@@ -142,7 +148,7 @@ export class GameComponent {
   startCounter(): void {
     let textElement = document.getElementById('game_text_display');
 
-    if (textElement) {
+    if (textElement && this.image?.target) {
       textElement.textContent = `Find the ${this.image?.target || ''}`;
     }
 
@@ -171,6 +177,6 @@ export class GameComponent {
 
         }
       }, 1000);
-    }, 5000);
+    }, this?.image?.target ? 5000 : 0);
   }
 }

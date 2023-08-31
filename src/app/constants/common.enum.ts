@@ -17,5 +17,5 @@ export interface GameEntry {
   posY: number,
   width: number,
   height: number,
-  target: string
+  target?: string
 }
