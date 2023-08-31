@@ -1,1 +1,10 @@
-<p>info-form works!</p>
+<form (submit)="saveFormData($event)">
+  <div *ngFor="let item of formData?.formItems">
+    <label [for]="item.value" [innerText]="item.value"></label>
+    <select [name]="item.value" *ngIf="item.type == 'select'">
+      <option *ngFor="let option of item.options" [value]="option" [innerText]="option"></option>
+    </select>
+    <input [name]="item.value" [type]="item.type" [placeholder]="item.value" *ngIf="item.type != 'select'">
+  </div>
+  <input type="submit">
+</form>
