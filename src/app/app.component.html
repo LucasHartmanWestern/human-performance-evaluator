@@ -6,7 +6,11 @@
   <div class="main">
 
     <div class="title">
-      Reaction Time Evaluator
+      <span>Reaction Time Evaluator</span>
+      <div class="modeToggle">
+        <input type="checkbox" id="darkmode-toggle" (click)="toggleMode()"/>
+        <label for="darkmode-toggle"></label>
+      </div>
     </div>
 
     <div class="info-form" *ngIf="!formData">
@@ -20,12 +24,12 @@
   </div>
 
   <footer>
+    <p>© 2023 Hartman and Chandel</p>
+    <p>Thanks to Dr. Roy Eagleson</p>
     <section id="socials">
       <a href="https://github.com/cchandel-dev/Visual-Search-Research" id="github" target="_blank"></a>
-      <span>Github Repository</span>
+      <span>Github</span>
     </section>
-    <p>Thanks to Dr. Roy Eagleson</p>
-    <p>© 2023 Hartman and Chandel</p>
   </footer>
 
 </div>

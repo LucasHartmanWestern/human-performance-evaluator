@@ -1,8 +1,8 @@
 $image-path: '~src/assets/images/';
 
 body {
-  background-color: var(--background);
-  font-family: Roboto, HelvLight;
+  background-color: var(--background) !important;
+  font-family: Roboto, HelvLight !important;
 
   --background: #F9F7F7;
   --background-overlay: linear-gradient(RGBA(249, 247, 247, 1), RGBA(249, 247, 247, 0.99), RGBA(249, 247, 247, 0));

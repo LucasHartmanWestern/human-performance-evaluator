@@ -14,12 +14,21 @@ $image-path: '/assets/images/';
 
 .title {
   @media (max-height: 700px) {
-    display: none;
+    font-size: 1rem;
+  }
+  @media (max-width: 768px) {
+    padding: 0 0 24px 0 !important;
   }
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  width: 100%;
   color: var(--secondary);
+  max-width: 1700px;
 }
 
 .main {
@@ -34,7 +43,6 @@ $image-path: '/assets/images/';
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
 
   div {
     padding: 24px;
@@ -47,6 +55,8 @@ $image-path: '/assets/images/';
     width: 100%;
     border: 1px solid var(--secondary);
     border-radius: 12px;
+    background: var(--primary);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 }
 
@@ -58,10 +68,12 @@ footer {
   @media (max-width: 768px) {
     flex-direction: column !important;
     width: calc(100%) !important;
-    margin-left: 0 !important;
+    margin: 0 !important;
+    padding: 20px;
 
     #socials {
       width: 100% !important;
+      justify-content: center !important;
     }
 
     p {
@@ -86,13 +98,15 @@ footer {
   overflow: hidden;
   background: var(--primary);
   width: calc(100% + 20px);
-  margin-left: -10px;
-  padding: 10px;
+  margin: 0 10px;
+  padding: 0 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   min-height: 64px;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   p {
     color: var(--text);
@@ -109,8 +123,8 @@ footer {
 
     a {
       color: var(--text);
-      width: 48px;
-      height: 48px;
+      width: 36px;
+      height: 36px;
       background-repeat: no-repeat !important;
       background-position: center !important;
       background-size: cover !important;
@@ -120,5 +134,65 @@ footer {
     #github {
       background: url('#{$image-path}github.png');
     }
+  }
+}
+
+.modeToggle {
+  width: 64px;
+  height: 24px;
+  overflow-x: hidden;
+  position: relative;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0 !important;
+
+  label {
+    width: 64px;
+    height: 24px;
+    position: relative;
+    display: block;
+    background: #ebebeb;
+    border-radius: 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    cursor: pointer;
+  }
+
+  label:after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 5.5px;
+    left: 7.5px;
+    background: linear-gradient(180deg, #ffcc89, #d8860b);
+    border-radius: 180px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  }
+
+  input {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  input:checked + label {
+    background: #ebebeb;
+  }
+
+  input:checked + label:after {
+    left: 90%;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, #777, #3a3a3a);
+  }
+
+  label, label:after {
+    transition: 0.3s
+  }
+
+  label:active:after {
+    width: 40%;
   }
 }
