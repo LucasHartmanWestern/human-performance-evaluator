@@ -24,7 +24,7 @@ export class GameEndpointsService {
   }
 
   submitImage(time: string, numOfErrors: number): Observable<any> {
-    return this.http.post<any>(`${Constants.apiPaths.game}/begin`, {time: time, numOfErrors: numOfErrors, userInfo: this.userInfo}, {headers: this.httpHeaders}).pipe(
+    return this.http.post<any>(`${Constants.apiPaths.game}/next`, {time: time, numOfErrors: numOfErrors, userInfo: this.userInfo}, {headers: this.httpHeaders}).pipe(
       map((data: any) => data),
       catchError(this.handleError)
     );
