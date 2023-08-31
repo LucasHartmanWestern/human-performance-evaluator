@@ -21,6 +21,8 @@ export class GameComponent {
   elapsedTime: number = 0;
   numOfErrors: number = 0;
 
+  maxNumOfTargets: number = 20;
+
   timer: any;
 
   started: boolean = false;
@@ -72,6 +74,11 @@ export class GameComponent {
   found(event: any): void {
     event?.target?.setAttribute('class', 'found');
 
+    if (this.imageCounter == this.maxNumOfTargets) {
+      this.end(true);
+      return;
+    }
+
     clearInterval(this.timer);
     document.getElementById('game_text_display')?.removeAttribute('class');
 
@@ -110,7 +117,6 @@ export class GameComponent {
   prepareItem(): void {
     let image = document.getElementById('game_image');
     image?.setAttribute('src', `assets/images/test-images/${this.image?.file}`);
-    console.log(image);
 
     setTimeout(() => {
       this.showItem();
@@ -126,9 +132,11 @@ export class GameComponent {
     this.startCounter();
   }
 
-  end(): void {
+  end(completed?: boolean): void {
     let textElement = document.getElementById('game_text_display');
-    if (textElement) textElement.textContent = `Completed ${this.imageCounter - 1} tests`;
+    if (textElement) {
+      textElement.textContent = completed ? 'Thank you for participating!' : `Completed ${this.imageCounter - 1} tests`;
+    }
     textElement?.removeAttribute('class');
 
     this.elapsedTime = 0;

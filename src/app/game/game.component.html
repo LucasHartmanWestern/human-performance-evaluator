@@ -12,7 +12,7 @@
 
     <div class="game_info">
       <span class="timer" [textContent]="elapsedTime | msToTime"></span>
-      <span class="img_counter">Round {{imageCounter}}/20</span>
+      <span class="img_counter">Round {{imageCounter}}/{{maxNumOfTargets}}</span>
       <span class="errors">{{numOfErrors}} mistakes</span>
     </div>
 
