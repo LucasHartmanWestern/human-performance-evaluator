@@ -1,3 +1,7 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#fff" type="ball-circus" [fullScreen]="true">
+  <p>Loading...</p>
+</ngx-spinner>
+
 <div class="whole">
 
   <div class="main">
@@ -6,7 +10,7 @@
       Reaction Time Evaluator
     </div>
 
-    <div class="info-form">
+    <div class="info-form" *ngIf="formData">
       <app-info-form></app-info-form>
     </div>
 

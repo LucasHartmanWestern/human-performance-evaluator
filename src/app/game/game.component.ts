@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GameEndpointsService } from "../services/game-endpoints.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-game',
@@ -8,15 +9,17 @@ import { GameEndpointsService } from "../services/game-endpoints.service";
 })
 export class GameComponent {
 
-  constructor(private gameEndpointsService: GameEndpointsService) { }
+  constructor(private gameEndpointsService: GameEndpointsService, private spinner: NgxSpinnerService) { }
 
   image: { file: string, posX: number, posY: number, width: number, height: number } | undefined;
 
   // Get users data
   ngOnInit(): void {
+    this.spinner.show();
     this.gameEndpointsService.getFirstImage().subscribe(res => {
       this.image = res;
       this.moveButton();
+      this.spinner.hide();
     }, error => {
       this.image = {
         file: '',
@@ -26,6 +29,7 @@ export class GameComponent {
         height: 24
       }
       this.moveButton();
+      this.spinner.hide();
     });
   }
 
