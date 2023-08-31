@@ -1,0 +1,52 @@
+.content {
+  display: flex;
+  justify-content: center;
+
+  .game_window {
+    border-radius: 12px;
+    border: 1px solid red;
+    display: flex;
+    position: relative;
+    justify-content: left;
+    align-items: center;
+
+    img {
+      position: absolute;
+      border-radius: 12px;
+    }
+
+    button {
+      position: absolute;
+      border: 2px solid blue;
+      background: none;
+      height: 0;
+      width: 0;
+    }
+
+    .text {
+      margin: auto;
+    }
+  }
+
+  .game_sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .game_info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 12px;
+      align-items: center;
+    }
+
+    .game_controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px;
+    }
+  }
+}

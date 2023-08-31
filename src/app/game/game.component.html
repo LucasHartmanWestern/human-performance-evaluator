@@ -1,1 +1,23 @@
+<div class="content">
 
+  <div class="game_window" id="window">
+    <span class="text">Ready to play?</span>
+    <img src="assets/images/test-images/test_1.png" (click)="mistake()">
+    <button (click)="found()" id="foundButton"></button>
+  </div>
+
+  <div class="game_sidebar">
+
+    <div class="game_info">
+      <span class="timer">00:00</span>
+      <span class="img_counter">0/20</span>
+    </div>
+
+    <div class="game_controls">
+      <button (click)="begin()">Begin Game</button>
+      <button (click)="end()">End Game</button>
+    </div>
+
+  </div>
+
+</div>
