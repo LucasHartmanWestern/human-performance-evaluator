@@ -44,6 +44,7 @@
         height: 0;
         width: 0;
         border: none;
+        cursor: default;
 
         &.found {
           border: 2px solid var(--text) !important;
@@ -68,14 +69,14 @@
 
       @keyframes countdown {
         0% {
-          transform: scale(1);
+          font-size: 1.4rem;
           opacity: 80%;
         }
         30% {
-          transform: scale(1.5);
+          font-size: 1.6rem;
         }
         100% {
-          transform: scale(1);
+          font-size: 1.4rem;
           opacity: 80%;
         }
       }

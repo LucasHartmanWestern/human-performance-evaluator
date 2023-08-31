@@ -35,8 +35,8 @@ export class GameComponent {
     }, error => {
       this.image = {
         file: 'test_1.png',
-        posX: 155,
-        posY: 203,
+        posX: 153,
+        posY: 200,
         width: 28,
         height: 28,
         target: 'Red Square'
@@ -56,14 +56,15 @@ export class GameComponent {
 
     let windowContainer = document.getElementById('window');
     let img = document.querySelector('img');
-    //windowContainer?.setAttribute('style', `height: ${img?.offsetHeight}px; width: ${img?.offsetWidth}px;`);
 
     let button = document.getElementById('foundButton');
-    button?.setAttribute('style', `width: calc(${this.image?.width} / ${img?.offsetWidth} * 100%); height: calc(${this.image?.height} / ${img?.offsetHeight} * 100%); top: calc(${this.image?.posY} / ${img?.offsetHeight} * 100%); left: calc(${this.image?.posX} / ${img?.offsetWidth} * 100%);`);
 
-    setTimeout(() => {
-      windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
-    }, 10);
+    let imgHeight = this.image?.file == 'test_1.png' ? 286 : 201;
+    let imgWidth = this.image?.file == 'test_1.png' ? 286 : 250;
+
+    button?.setAttribute('style', `width: calc(${this.image?.width} / ${imgWidth} * 100%); height: calc(${this.image?.height} / ${imgHeight} * 100%); top: calc(${this.image?.posY} / ${imgHeight} * 100%); left: calc(${this.image?.posX} / ${imgWidth} * 100%);`);
+
+    windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-height: 100%; max-width: 100%;');
   }
 
   found(event: any): void {
@@ -82,8 +83,8 @@ export class GameComponent {
       if (this.image?.file == 'test_2.png')
         this.image = {
           file: 'test_1.png',
-          posX: 155,
-          posY: 203,
+          posX: 153,
+          posY: 200,
           width: 28,
           height: 28,
           target: 'Red Square'
@@ -92,7 +93,7 @@ export class GameComponent {
         this.image = {
           file: 'test_2.png',
           posX: 45,
-          posY: 116,
+          posY: 113,
           width: 24,
           height: 24,
           target: 'Red Cross'
