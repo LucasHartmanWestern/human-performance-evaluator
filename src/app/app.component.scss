@@ -1,5 +1,5 @@
+//$image-path: '/static/assets/images/';
 $image-path: '/assets/images/';
-
 
 .whole {
   @media (min-width: 769px) {
@@ -28,7 +28,7 @@ $image-path: '/assets/images/';
   font-size: 1.4rem;
   width: 100%;
   color: var(--secondary);
-  max-width: 1700px;
+  max-width: 900px;
 }
 
 .main {
@@ -36,8 +36,11 @@ $image-path: '/assets/images/';
     margin-right: auto;
     margin-left: auto;
   }
+  @media (max-width: 768px) {
+    max-width: 500px;
+  }
   width: 95vw;
-  max-width: 1700px;
+  max-width: 900px;
   height: calc(100vh - 100px);
   display: flex;
   justify-content: center;

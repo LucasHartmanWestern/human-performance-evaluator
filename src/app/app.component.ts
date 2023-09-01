@@ -10,7 +10,7 @@ export class AppComponent {
 
   constructor() { }
 
-  formData: any = localStorage.getItem('userInfo');
+  userID: any = localStorage.getItem('userID');
   formSubmission: any;
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class AppComponent {
   }
 
   formSubmit(): void {
-    this.formData = localStorage.getItem('userInfo');
+    this.userID = localStorage.getItem('userID');
   }
 
   toggleMode(): void {

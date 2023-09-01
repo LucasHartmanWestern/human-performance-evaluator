@@ -1,6 +1,7 @@
 .content {
   @media (max-width: 768px) {
     flex-direction: column;
+    max-width: 500px !important;
   }
 
   display: flex;
@@ -8,6 +9,7 @@
   align-items: center;
   width: 95vw;
   height: 60vh;
+  max-width: 900px;
 
   .game_container {
     @media (max-width: 768px) {
@@ -24,11 +26,8 @@
 
     .game_window {
       border-radius: 12px;
-      display: flex;
       position: relative;
       display: inline-block;
-      justify-content: left;
-      align-items: center;
 
       img {
         display: block;
@@ -36,6 +35,7 @@
         height: auto;
         border-radius: 12px;
         padding: 2px;
+        max-height: 40vh;
       }
 
       button {
@@ -47,7 +47,7 @@
         cursor: default;
 
         &.found {
-          border: 2px solid var(--text) !important;
+          //border: 2px solid var(--text) !important;
         }
       }
 
@@ -112,7 +112,7 @@
     .game_controls {
       @media (max-width: 768px) {
         flex-direction: row !important;
-        width: 90vw;
+        width: 90%;
       }
       @media (min-width: 769px) {
         height: 148px;

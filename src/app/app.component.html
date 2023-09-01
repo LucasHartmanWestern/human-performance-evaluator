@@ -13,12 +13,12 @@
       </div>
     </div>
 
-    <div class="info-form" *ngIf="!formData">
+    <div class="info-form" *ngIf="!userID">
       <app-info-form (formSubmission)="formSubmit()"></app-info-form>
     </div>
 
     <div class="game">
-      <app-game [ready]="formData"></app-game>
+      <app-game [ready]="userID"></app-game>
     </div>
 
   </div>

@@ -15,6 +15,7 @@ export class InfoFormComponent {
 
   formData: FormData | undefined;
   savedFormData: UserInfo[] = [];
+  userID: number | undefined;
 
   // Get users data
   ngOnInit(): void {
@@ -23,10 +24,9 @@ export class InfoFormComponent {
     }, error => {
       this.formData = {
         formItems: [
-          { value: "First Name", type: "string" },
-          { value: "Last Name", type: "string" },
+          { value: "Full Name", type: "string" },
           { value: "Age", type: "number" },
-          { value: "Gender", type: "select", options: ["Male" ,"Female", "Prefer not to say"]}
+          { value: "Sex", type: "select", options: ["Male" ,"Female", "Prefer not to say"]}
         ]
       }
     });
@@ -37,7 +37,14 @@ export class InfoFormComponent {
     for (let input of event?.target?.querySelectorAll('div')) {
       this.savedFormData.push({field: input?.querySelector('input, select')?.name, value: input?.querySelector('input, select')?.value});
     }
-    localStorage.setItem('userInfo', JSON.stringify(this.savedFormData));
-    this.formSubmission.emit(this.savedFormData);
+    this.formEndpointsService.getUserID(this.savedFormData).subscribe(res => {
+      this.userID = res;
+      localStorage.setItem('userID', `${this.userID}`);
+      this.formSubmission.emit(this.userID);
+    }, error => {
+      this.userID = 1;
+      localStorage.setItem('userID', `${this.userID}`);
+      this.formSubmission.emit(this.userID);
+    });
   }
 }

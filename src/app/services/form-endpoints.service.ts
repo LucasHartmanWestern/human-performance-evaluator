@@ -22,6 +22,18 @@ export class FormEndpointsService {
     );
   }
 
+  getUserID(userInfo: { field: string, value: string }[]): Observable<any> {
+    let userData: any = {};
+    console.log(userInfo);
+    userInfo?.forEach((entry: { field: string, value: string }) => {
+      userData[`${entry.field}`] = entry.value;
+    });
+    return this.http.post<any>(`${Constants.apiPaths.save_form_data}`, userData, {headers: this.httpHeaders}).pipe(
+      map((data: FormData) => data),
+      catchError(this.handleError)
+    );
+  }
+
   // Handle errors
   private handleError(err: HttpErrorResponse) {
     let errorMessage = '';

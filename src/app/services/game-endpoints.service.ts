@@ -15,17 +15,16 @@ export class GameEndpointsService {
     'Authorization': localStorage.getItem('token') || 'N/A'
   });
 
-  userInfo: any = JSON.parse(localStorage.getItem('userInfo') || '{}');
-
   getFirstImage(): Observable<any> {
-    return this.http.get<GameEntry>(`${Constants.apiPaths.game}/begin`, {headers: this.httpHeaders}).pipe(
+    return this.http.get<GameEntry>(`${Constants.apiPaths.game}-begin`, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)
     );
   }
 
-  submitImage(time: number, numOfErrors: number): Observable<any> {
-    return this.http.post<GameEntry>(`${Constants.apiPaths.game}/next`, {time: time, numOfErrors: numOfErrors, userInfo: this.userInfo}, {headers: this.httpHeaders}).pipe(
+  submitImage(time: number, numOfErrors: number, imageIndex: number): Observable<any> {
+    let userID: any = JSON.parse(localStorage.getItem('userID') || '{}');
+    return this.http.post<GameEntry>(`${Constants.apiPaths.game}-next`, {time: time, numOfErrors: numOfErrors, 'user-ID': userID, 'user-index': imageIndex}, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)
     );
