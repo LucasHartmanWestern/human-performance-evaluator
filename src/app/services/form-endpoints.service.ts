@@ -24,7 +24,6 @@ export class FormEndpointsService {
 
   getUserID(userInfo: { field: string, value: string }[]): Observable<any> {
     let userData: any = {};
-    console.log(userInfo);
     userInfo?.forEach((entry: { field: string, value: string }) => {
       userData[`${entry.field}`] = entry.value;
     });

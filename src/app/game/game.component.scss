@@ -58,7 +58,7 @@
 
         &.counting {
           color: var(--secondary);
-          animation: countdown 1s forwards;
+          animation: countdown 0.75s forwards;
           animation-iteration-count: infinite;
         }
 

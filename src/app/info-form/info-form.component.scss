@@ -35,6 +35,19 @@
         border-radius: 8px;
         padding: 4px 8px;
         font-size: 1.1rem;
+        color: black !important;
+
+        &::placeholder {
+          color: grey !important;
+        }
+      }
+
+      select {
+        color: black !important;
+      }
+
+      option {
+        color: black !important;
       }
     }
 

@@ -15,7 +15,7 @@ export class InfoFormComponent {
 
   formData: FormData | undefined;
   savedFormData: UserInfo[] = [];
-  userID: number | undefined;
+  userID: any;
 
   // Get users data
   ngOnInit(): void {
@@ -32,19 +32,22 @@ export class InfoFormComponent {
     });
   }
 
-  saveFormData(event: any): void {
-    event.preventDefault();
-    for (let input of event?.target?.querySelectorAll('div')) {
-      this.savedFormData.push({field: input?.querySelector('input, select')?.name, value: input?.querySelector('input, select')?.value});
+  saveFormData(event: any, repeat: boolean = false, counter: number = 0): void {
+    if (!repeat) {
+      event.preventDefault();
+      for (let input of event?.target?.querySelectorAll('div')) {
+        this.savedFormData.push({field: input?.querySelector('input, select')?.name, value: input?.querySelector('input, select')?.value});
+      }
     }
-    this.formEndpointsService.getUserID(this.savedFormData).subscribe(res => {
-      this.userID = res;
-      localStorage.setItem('userID', `${this.userID}`);
-      this.formSubmission.emit(this.userID);
-    }, error => {
-      this.userID = 1;
-      localStorage.setItem('userID', `${this.userID}`);
-      this.formSubmission.emit(this.userID);
-    });
+    if (counter < 10) {
+      this.formEndpointsService.getUserID(this.savedFormData).subscribe(res => {
+        this.userID = res.user_id;
+        localStorage.setItem('userID', `${res.user_id}`);
+        this.formSubmission.emit(this.userID);
+      }, error => {
+        console.log(error);
+        this.saveFormData(event, true, counter + 1);
+      });
+    }
   }
 }

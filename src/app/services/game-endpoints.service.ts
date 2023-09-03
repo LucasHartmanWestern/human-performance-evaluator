@@ -23,7 +23,10 @@ export class GameEndpointsService {
   }
 
   submitImage(time: number, numOfErrors: number, imageIndex: number): Observable<any> {
-    let userID: any = JSON.parse(localStorage.getItem('userID') || '{}');
+    let userID: any = localStorage.getItem('userID');
+    if (!userID) {
+     console.log("NO USER ID");
+    }
     return this.http.post<GameEntry>(`${Constants.apiPaths.game}-next`, {time: time, numOfErrors: numOfErrors, 'user-ID': userID, 'user-index': imageIndex}, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)
