@@ -17,5 +17,7 @@ export interface GameEntry {
   posY: number,
   width: number,
   height: number,
-  target?: string
+  find_pos: boolean,
+  target?: string,
+  present?: boolean
 }

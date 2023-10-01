@@ -4,7 +4,12 @@
     <div class="game_window" id="window">
       <span id="game_text_display" [textContent]="ready ? 'Ready to Play?' : 'Complete Form to Play'"></span>
       <img (click)="mistake()" *ngIf="running" id="game_image">
-      <button (click)="found($event)" id="foundButton" *ngIf="running"></button>
+      <button (click)="found($event)" id="foundButton" *ngIf="running && image?.find_pos"></button>
+    </div>
+
+    <div class="present_buttons" *ngIf="running && !image?.find_pos">
+      <button class="present"(click)="found($event, true)">Present</button>
+      <button class="absent" (click)="found($event, false)">Absent</button>
     </div>
   </div>
 

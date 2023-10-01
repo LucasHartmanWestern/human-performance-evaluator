@@ -1,5 +1,5 @@
-const serverPrefix = `https://visual-search-research-797f1f0ba0ac.herokuapp.com`;
-// const serverPrefix = '';
+// const serverPrefix = `https://visual-search-research-797f1f0ba0ac.herokuapp.com`;
+const serverPrefix = '';
 
 export const Constants = {
   apiPaths: {

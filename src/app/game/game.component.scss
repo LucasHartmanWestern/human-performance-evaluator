@@ -14,7 +14,7 @@
   .game_container {
     @media (max-width: 768px) {
       width: 95% !important;
-      height: 100vh !important;
+      height: 60% !important;
     }
 
     max-width: 1200px;
@@ -23,6 +23,40 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+
+    .present_buttons {
+      @media (max-width: 224px) {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      display: flex;
+      justify-content: space-between;
+      background: var(--background);
+      width: 75%;
+      height: auto;
+      border-radius: 8px;
+      padding: 4px;
+      max-width: 400px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+      button {
+        border: none;
+        outline: none;
+        background: none;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 1.1rem;
+
+        &.present {
+          color: #4C9900;
+        }
+        &.absent {
+          color: #CC0000;
+        }
+      }
+    }
 
     .game_window {
       border-radius: 12px;
@@ -84,14 +118,20 @@
   }
 
   .game_sidebar {
+    @media (max-height: 700px) {
+      height: 115px !important;
+    }
     @media (max-width: 768px) {
       width: 100% !important;
+      height: calc(min(40%, 175px));
+    }
+    @media (min-width: 769px) {
+      height: 60vh;
     }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 60vh;
     width: 25%;
 
     .game_info {

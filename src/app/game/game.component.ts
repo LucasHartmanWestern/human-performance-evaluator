@@ -41,15 +41,28 @@ export class GameComponent {
         posX: res.posX,
         posY: res.posY,
         width: res.width,
-        height: res.height
+        height: res.height,
+        find_pos: res.find_position
       }
-      if (res?.target) this.image['target'] = res.target;
-      if (res?.max_images) this.maxNumOfTargets = res.max_images;
+      if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.present != undefined) this.image['present'] = res.present;
+      if (res?.max_images != undefined) this.maxNumOfTargets = res.max_images;
 
       this.spinner.hide();
     }, error => {
       console.log(error);
       this.spinner.hide();
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (document.querySelector('.present_buttons') != null) {
+        if (event.key === 'y' || event.key === 'Y' || event.key === 'p' || event.key === 'P') {
+          (document.querySelector('.present') as HTMLElement).click();
+        }
+        else if (event.key === 'n' || event.key === 'N' || event.key === 'a' || event.key === 'A') {
+          (document.querySelector('.absent') as HTMLElement).click();
+        }
+      }
     });
   }
 
@@ -76,8 +89,20 @@ export class GameComponent {
     windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-width: 100%;');
   }
 
-  found(event: any): void {
-    event?.target?.setAttribute('class', 'found');
+  found(event: any, present?: boolean): void {
+
+    if (present != undefined) {
+      if (!this.image?.find_pos) {
+        console.log("IMAGE: " + this.image?.present);
+        console.log("CLICKED: " + present)
+        if (this.image?.present != present) {
+          this.numOfErrors += 1;
+        }
+      }
+    }
+    else {
+      event?.target?.setAttribute('class', 'found');
+    }
 
     if (this.imageCounter == this.maxNumOfTargets) {
       this.end(true);
@@ -97,9 +122,14 @@ export class GameComponent {
         posX: res.posX,
         posY: res.posY,
         width: res.width,
-        height: res.height
+        height: res.height,
+        find_pos: res.find_position
       }
-      if (res?.target) this.image['target'] = res.target;
+      if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.present != undefined) this.image['present'] = res.present;
+
+      console.log("IMAGE:", this.image);
+      console.log("RESPONSE:", res);
 
       this.startCounter();
       this.running = false;
@@ -119,7 +149,8 @@ export class GameComponent {
   }
 
   mistake(): void {
-    this.numOfErrors += 1;
+    if (this.image?.find_pos)
+      this.numOfErrors += 1;
   }
 
   begin(): void {
@@ -145,14 +176,34 @@ export class GameComponent {
     this.ended = false;
     this.started = true;
     this.imageCounter = 0;
-    this.startCounter();
+
+    this.spinner.show();
+    this.gameEndpointsService.getFirstImage().subscribe(res => {
+      this.image = {
+        file: res.image,
+        posX: res.posX,
+        posY: res.posY,
+        width: res.width,
+        height: res.height,
+        find_pos: res.find_position
+      }
+      if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.present != undefined) this.image['present'] = res.present;
+      if (res?.max_images != undefined) this.maxNumOfTargets = res.max_images;
+
+      this.spinner.hide();
+      this.startCounter();
+    }, error => {
+      console.log(error);
+      this.spinner.hide();
+    });
   }
 
   startCounter(): void {
     let textElement = document.getElementById('game_text_display');
 
     if (textElement && this.image?.target) {
-      textElement.textContent = `Find the ${this.image?.target || ''}`;
+      textElement.textContent = `${this.image?.target || ''}`;
     }
 
     setTimeout(() => {
