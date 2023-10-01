@@ -3,8 +3,8 @@
   <div class="game_container">
     <div class="game_window" id="window">
       <span id="game_text_display" [textContent]="ready ? 'Ready to Play?' : 'Complete Form to Play'"></span>
-      <img (click)="mistake()" *ngIf="running" id="game_image">
-      <button (click)="found($event)" id="foundButton" *ngIf="running && image?.find_pos"></button>
+      <img (click)="image?.check_errors ? mistake() : getPos($event)" *ngIf="running" id="game_image">
+      <button (click)="found($event)" id="foundButton" *ngIf="running && image?.find_pos && image?.check_errors"></button>
     </div>
 
     <div class="present_buttons" *ngIf="running && !image?.find_pos">
@@ -18,7 +18,7 @@
     <div class="game_info">
       <span class="timer" [textContent]="elapsedTime | msToTime"></span>
       <span class="img_counter">Round {{imageCounter}}/{{maxNumOfTargets}}</span>
-      <span class="errors">{{numOfErrors}} mistakes</span>
+      <span class="errors" *ngIf="image?.check_errors">{{numOfErrors}} mistakes</span>
     </div>
 
     <div class="game_controls">

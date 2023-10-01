@@ -18,6 +18,7 @@ export interface GameEntry {
   width: number,
   height: number,
   find_pos: boolean,
+  check_errors?: boolean,
   target?: string,
   present?: boolean
 }

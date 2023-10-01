@@ -14,7 +14,7 @@
   .game_container {
     @media (max-width: 768px) {
       width: 95% !important;
-      height: 60% !important;
+      //height: 60% !important;
     }
 
     max-width: 1200px;
@@ -70,6 +70,12 @@
         border-radius: 12px;
         padding: 2px;
         max-height: 40vh;
+        user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
       }
 
       button {

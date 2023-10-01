@@ -26,6 +26,9 @@ export class GameComponent {
   totalMistakes: number = 0;
   totalDuration: number = 0;
 
+  imgHeight = 400;
+  imgWidth = 400;
+
   timer: any;
 
   started: boolean = false;
@@ -42,14 +45,26 @@ export class GameComponent {
         posY: res.posY,
         width: res.width,
         height: res.height,
-        find_pos: res.find_position
+        find_pos: res.find_position,
       }
       if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
       if (res?.max_images != undefined) this.maxNumOfTargets = res.max_images;
 
       this.spinner.hide();
     }, error => {
+
+      this.image = {
+        file: "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",
+        posX: 200,
+        posY: 300,
+        width: 10,
+        height: 10,
+        find_pos: true,
+        target: "Where is the red square?",
+      }
+
       console.log(error);
       this.spinner.hide();
     });
@@ -81,20 +96,33 @@ export class GameComponent {
 
     let button = document.getElementById('foundButton');
 
-    let imgHeight = 400;
-    let imgWidth = 400;
-
-    button?.setAttribute('style', `width: calc(${this.image?.width} / ${imgWidth} * 100%); height: calc(${this.image?.height} / ${imgHeight} * 100%); top: calc((${this.image?.posY} - (${this.image?.height} / 2)) / ${imgHeight} * 100%); left: calc((${this.image?.posX} - (${this.image?.width} / 2)) / ${imgWidth} * 100%);`);
+    button?.setAttribute('style', `width: calc(${this.image?.width} / ${this.imgWidth} * 100%); height: calc(${this.image?.height} / ${this.imgHeight} * 100%); top: calc((${this.image?.posY} - (${this.image?.height} / 2)) / ${this.imgHeight} * 100%); left: calc((${this.image?.posX} - (${this.image?.width} / 2)) / ${this.imgWidth} * 100%);`);
 
     windowContainer?.querySelector('#game_image')?.setAttribute('style', 'max-width: 100%;');
   }
 
-  found(event: any, present?: boolean): void {
+  getPos(event: any): void {
+    const target = event.currentTarget;
+    const rect = target.getBoundingClientRect();
+
+    const x = event.clientX - rect.left; // x position within the image
+    const y = event.clientY - rect.top; // y position within the image
+
+    const xPercentage = (x / rect.width);
+    const yPercentage = (y / rect.height);
+
+    const xCoord = xPercentage * this.imgWidth;
+    const yCoord = yPercentage * this.imgWidth;
+
+    const distOffset = (((xCoord - (this.image?.posX || 0)) ** 2) + ((yCoord - (this.image?.posY || 0)) ** 2)) ** 0.5
+
+    this.found(event, undefined, distOffset, xCoord, yCoord);
+  }
+
+  found(event: any, present?: boolean, distOffset?: number, xCoord?: number, yCoord?: number): void {
 
     if (present != undefined) {
       if (!this.image?.find_pos) {
-        console.log("IMAGE: " + this.image?.present);
-        console.log("CLICKED: " + present)
         if (this.image?.present != present) {
           this.numOfErrors += 1;
         }
@@ -116,7 +144,7 @@ export class GameComponent {
     this.totalMistakes += this.numOfErrors;
 
     this.spinner.show();
-    this.gameEndpointsService.submitImage(this.elapsedTime, this.numOfErrors, this.imageCounter).subscribe(res => {
+    this.gameEndpointsService.submitImage(this.elapsedTime, this.numOfErrors, this.imageCounter, distOffset, xCoord, yCoord).subscribe(res => {
       this.image = {
         file: res.image,
         posX: res.posX,
@@ -126,10 +154,8 @@ export class GameComponent {
         find_pos: res.find_position
       }
       if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
-
-      console.log("IMAGE:", this.image);
-      console.log("RESPONSE:", res);
 
       this.startCounter();
       this.running = false;
@@ -188,6 +214,7 @@ export class GameComponent {
         find_pos: res.find_position
       }
       if (res?.target != undefined) this.image['target'] = res.target;
+      if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
       if (res?.max_images != undefined) this.maxNumOfTargets = res.max_images;
 
