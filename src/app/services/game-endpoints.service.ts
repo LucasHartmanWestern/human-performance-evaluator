@@ -22,7 +22,7 @@ export class GameEndpointsService {
     );
   }
 
-  submitImage(time: number, numOfErrors: number, imageIndex: number, distOffset?: number, xCoord?: number, yCoord?: number): Observable<any> {
+  submitImage(time: number, numOfErrors: number, imageIndex: number, distOffset?: number, xCoord?: number, yCoord?: number, extra?: any): Observable<any> {
     let userID: any = localStorage.getItem('userID');
     if (!userID) {
      console.log("NO USER ID");
@@ -34,7 +34,11 @@ export class GameEndpointsService {
       'user-index': imageIndex,
       'dist-offset': distOffset,
       'xCoord': xCoord,
-      'yCoord': yCoord
+      'yCoord': yCoord,
+      'num_shapes': extra.num_shapes,
+      'conjunction': extra.conjunction,
+      'target_color': extra.target_color,
+      'target_shape': extra.target_shape
     }, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)

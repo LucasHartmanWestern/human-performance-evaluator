@@ -20,5 +20,9 @@ export interface GameEntry {
   find_pos: boolean,
   check_errors?: boolean,
   target?: string,
-  present?: boolean
+  present?: boolean,
+  num_shapes?: number,
+  conjunction?: any,
+  target_color?: any,
+  target_shape?: any
 }

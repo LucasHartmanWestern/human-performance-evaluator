@@ -35,6 +35,8 @@ export class GameComponent {
   running: boolean = false;
   ended: boolean = false;
 
+  extra: any;
+
   // Get users data
   ngOnInit(): void {
     this.spinner.show();
@@ -47,6 +49,14 @@ export class GameComponent {
         height: res.height,
         find_pos: res.find_position,
       }
+
+      this.extra = {
+        'num_shapes': res?.num_shapes,
+        'conjunction': res?.conjunction,
+        'target_color': res?.target_color,
+        'target_shape': res?.target_shaper,
+      }
+
       if (res?.target != undefined) this.image['target'] = res.target;
       if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
@@ -133,7 +143,7 @@ export class GameComponent {
     this.totalMistakes += this.numOfErrors;
 
     this.spinner.show();
-    this.gameEndpointsService.submitImage(this.elapsedTime, this.numOfErrors, this.imageCounter, distOffset, xCoord, yCoord).subscribe(res => {
+    this.gameEndpointsService.submitImage(this.elapsedTime, this.numOfErrors, this.imageCounter, distOffset, xCoord, yCoord, this.extra).subscribe(res => {
       this.image = {
         file: res.image,
         posX: res.posX,
@@ -142,6 +152,14 @@ export class GameComponent {
         height: res.height,
         find_pos: res.find_position
       }
+
+      this.extra = {
+        'num_shapes': res?.num_shapes,
+        'conjunction': res?.conjunction,
+        'target_color': res?.target_color,
+        'target_shape': res?.target_shaper,
+      }
+
       if (res?.target != undefined) this.image['target'] = res.target;
       if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
@@ -202,6 +220,14 @@ export class GameComponent {
         height: res.height,
         find_pos: res.find_position
       }
+
+      this.extra = {
+        'num_shapes': res?.num_shapes,
+        'conjunction': res?.conjunction,
+        'target_color': res?.target_color,
+        'target_shape': res?.target_shaper,
+      }
+
       if (res?.target != undefined) this.image['target'] = res.target;
       if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
