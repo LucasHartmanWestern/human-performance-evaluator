@@ -105,8 +105,8 @@ export class GameComponent {
     const xCoord = xPercentage * this.imgWidth;
     const yCoord = yPercentage * this.imgWidth;
 
-    const xOffset = xCoord - (this.image?.posX || 0);
-    const yOffset = yCoord - (this.image?.posY || 0);
+    const xOffset = Math.abs(xCoord - (this.image?.posX || 0));
+    const yOffset = Math.abs(yCoord - (this.image?.posY || 0));
 
     const distOffset = (((xCoord - (this.image?.posX || 0)) ** 2) + ((yCoord - (this.image?.posY || 0)) ** 2)) ** 0.5
 
