@@ -15,14 +15,7 @@ export class GameEndpointsService {
     'Authorization': localStorage.getItem('token') || 'N/A'
   });
 
-  getFirstImage(): Observable<any> {
-    return this.http.get<GameEntry>(`${Constants.apiPaths.game}-begin`, {headers: this.httpHeaders}).pipe(
-      map((data: GameEntry) => data),
-      catchError(this.handleError)
-    );
-  }
-
-  submitImage(time: number, numOfErrors: number, imageIndex: number, distOffset?: number, xCoord?: number, yCoord?: number, extra?: any): Observable<any> {
+  submitImage(time: number, numOfErrors: number, imageIndex: number, task_type?: string, distOffset?: number, xCoord?: number, yCoord?: number, present?: boolean, xOffset?: number, yOffset?: number, targetPostX?: number, targetPosY?: number, extra?: any): Observable<any> {
     let userID: any = localStorage.getItem('userID');
     if (!userID) {
      console.log("NO USER ID");
@@ -30,15 +23,21 @@ export class GameEndpointsService {
     return this.http.post<GameEntry>(`${Constants.apiPaths.game}-next`, {
       time: time,
       numOfErrors: numOfErrors,
+      'task_type': task_type,
       'user-ID': userID,
       'user-index': imageIndex,
       'dist-offset': distOffset,
       'xCoord': xCoord,
       'yCoord': yCoord,
+      'present': present,
       'num_shapes': extra.num_shapes,
       'conjunction': extra.conjunction,
       'target_color': extra.target_color,
-      'target_shape': extra.target_shape
+      'target_shape': extra.target_shape,
+      'x_offset': xOffset,
+      'y_offset': yOffset,
+      'initial_x': targetPostX,
+      'initial_y': targetPosY
     }, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)

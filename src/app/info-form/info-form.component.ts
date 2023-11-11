@@ -21,12 +21,12 @@ export class InfoFormComponent {
   ngOnInit(): void {
     this.formEndpointsService.getFormData().subscribe(res => {
       this.formData = res;
+
     }, error => {
       this.formData = {
         formItems: [
           { value: "Full Name", type: "string" },
-          { value: "Age", type: "number" },
-          { value: "Sex", type: "select", options: ["Male" ,"Female", "Prefer not to say"]}
+          { value: "Task Type", type: "select", options: ["detection" ,"pointing"]}
         ]
       }
     });
@@ -37,6 +37,13 @@ export class InfoFormComponent {
       event.preventDefault();
       for (let input of event?.target?.querySelectorAll('div')) {
         this.savedFormData.push({field: input?.querySelector('input, select')?.name, value: input?.querySelector('input, select')?.value});
+
+        console.log(`FIELD: ${input?.querySelector('input, select')?.name}`);
+
+        if (input?.querySelector('input, select')?.name == 'Task Type') {
+          console.log(`TASK TYPE: ${input?.querySelector('input, select')?.value}`);
+          localStorage.setItem('task_type', input?.querySelector('input, select')?.value);
+        }
       }
     }
     if (counter < 10) {

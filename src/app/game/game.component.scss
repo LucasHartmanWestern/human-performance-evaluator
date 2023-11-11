@@ -26,6 +26,10 @@
     flex-direction: column;
 
     .present_buttons {
+      @media (min-width: 769px) {
+        display: none;
+      }
+
       @media (max-width: 224px) {
         flex-direction: column;
         gap: 24px;
@@ -133,37 +137,97 @@
     }
     @media (min-width: 769px) {
       height: 60vh;
+
+      @media (max-height: 750px) {
+        flex-direction: row !important;
+        gap: 12px;
+      }
     }
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 25%;
+    gap: 24px;
+
+    .core_side {
+      @media (max-height: 750px) {
+        height: 100%;
+        justify-content: center;
+      }
+
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #pause {
+      @media (min-width: 769px) {
+        display: none;
+      }
+    }
+
+    .legend {
+      .title {
+        @media (max-height: 750px) {
+          font-size: 0.8rem !important;
+        }
+
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-decoration: underline;
+        width: 100%;
+        text-align: center;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 12px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      background: var(--background);
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      gap: 12px;
+    }
 
     .game_info {
       @media (max-height: 700px) {
-        flex-direction: row;
         width: 100%;
-        font-size: 0.8rem;
-      }
 
+        @media (max-width: 768px) {
+          flex-direction: row;
+        }
+      }
+      @media (min-height: 751px) {
+        font-size: 1.2rem;
+      }
+      font-size: 0.8rem;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       padding: 12px;
       align-items: center;
-      font-size: 1.2rem;
     }
 
     .game_controls {
       @media (max-width: 768px) {
         flex-direction: row !important;
-        width: 90%;
       }
       @media (min-width: 769px) {
         height: 148px;
+
+        @media (min-height: 751px) {
+          width: 148px;
+        }
       }
 
+      gap: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;

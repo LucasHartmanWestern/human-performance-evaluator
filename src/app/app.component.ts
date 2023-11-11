@@ -1,4 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { GameComponent } from "./game/game.component";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,8 @@ import { Component, EventEmitter } from '@angular/core';
 })
 export class AppComponent {
   title = 'hpe-frontend';
+
+  @ViewChild(GameComponent) gameComponent!: GameComponent;
 
   constructor() { }
 
@@ -22,6 +25,8 @@ export class AppComponent {
 
   formSubmit(): void {
     this.userID = localStorage.getItem('userID');
+    console.log('FORM SUBMITTED');
+    this.gameComponent.getNextImage(false);
   }
 
   toggleMode(): void {
