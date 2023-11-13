@@ -62,10 +62,20 @@
       }
     }
 
+    #additional_text {
+      display: block;
+      text-align: center;
+      position: fixed;
+      margin-bottom: 64px;
+    }
+
     .game_window {
       border-radius: 12px;
       position: relative;
       display: inline-block;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
 
       img {
         display: block;

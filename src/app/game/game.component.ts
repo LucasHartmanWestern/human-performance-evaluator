@@ -70,7 +70,7 @@ export class GameComponent {
     if (this.running) {
       clearInterval(this.timer);
       this.running = false;
-      this.startCounter(30, true);
+      this.startCounter(30, true, "Game will resume in:");
     }
   }
 
@@ -172,15 +172,23 @@ export class GameComponent {
       if (res?.conjunction != undefined) this.extra['conjunction'] = res.conjunction;
       if (res?.target_color != undefined) this.extra['target_color'] = res.target_color;
       if (res?.target_shape != undefined) this.extra['target_shape'] = res.target_shape;
+      if (res?.green_circles != undefined) this.extra['green_circles'] = res.green_circles;
+      if (res?.red_squares != undefined) this.extra['red_squares'] = res.red_squares;
+      if (res?.green_squares != undefined) this.extra['green_squares'] = res.green_squares;
 
       if (res?.target != undefined) this.image['target'] = res.target;
       if (res?.check_errors != undefined) this.image['check_errors'] = res.check_errors;
       if (res?.present != undefined) this.image['present'] = res.present;
       if (res?.max_images != undefined) this.maxNumOfTargets = res.max_images;
 
-      if (count) {
-        this.startCounter();
+      if (res?.pause != undefined) {
+        this.startCounter(30, false, res.pause);
         this.running = false;
+      } else {
+        if (count) {
+          this.startCounter();
+          this.running = false;
+        }
       }
 
       this.spinner.hide();
@@ -203,8 +211,8 @@ export class GameComponent {
     });
   }
 
-  prepareItem(): void {
-    this.elapsedTime = 0;
+  prepareItem(pause: boolean = false): void {
+    if (!pause) this.elapsedTime = 0;
     let image = document.getElementById('game_image');
     image?.setAttribute('src', `data:image/png;base64,${this.image?.file}`);
 
@@ -245,7 +253,7 @@ export class GameComponent {
     this.getNextImage(true);
   }
 
-  startCounter(interval: number = 3, pause: boolean = false): void {
+  startCounter(interval: number = 3, pause: boolean = false, counterText?: string): void {
     if (!pause) this.elapsedTime = 0;
 
     let textElement = document.getElementById('game_text_display');
@@ -255,6 +263,12 @@ export class GameComponent {
     }
 
     setTimeout(() => {
+      if (counterText) {
+        let counterTextElement = document.getElementById('additional_text');
+        if (counterTextElement)
+          counterTextElement.textContent = counterText;
+      }
+
       textElement?.setAttribute('class', 'counting');
       if (textElement) { textElement.textContent = `${interval}` };
 
@@ -266,10 +280,14 @@ export class GameComponent {
           clearInterval(countdownInterval);
           this.running = true;
 
+          let counterTextElement = document.getElementById('additional_text');
+          if (counterTextElement)
+            counterTextElement.textContent = '';
+
           if (!pause) this.imageCounter += 1;
 
           setTimeout(() => {
-            this.prepareItem();
+            this.prepareItem(pause);
           }, 10);
         } else {
 
@@ -280,6 +298,9 @@ export class GameComponent {
             else {
               textElement.textContent = '';
               textElement?.setAttribute('class', 'hidden');
+              let counterTextElement = document.getElementById('additional_text');
+              if (counterTextElement)
+                counterTextElement.textContent = '';
             }
           }
         }

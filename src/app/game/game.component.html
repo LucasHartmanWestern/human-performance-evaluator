@@ -1,6 +1,7 @@
 <div class="content">
 
   <div class="game_container">
+    <span id="additional_text"></span>
     <div class="game_window" id="window">
       <span id="game_text_display" [textContent]="ready ? 'Ready to Play?' : 'Complete Form to Play'"></span>
       <img (click)="image?.find_pos ? image?.check_errors ? mistake() : getPos($event) : null" *ngIf="running" id="game_image">
