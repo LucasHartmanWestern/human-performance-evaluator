@@ -35,6 +35,8 @@ export class GameComponent {
   ended: boolean = false;
 
   extra: any = {
+    'date': '',
+    'time': '',
     'num_shapes': '',
     'conjunction': '',
     'target_color': '',
@@ -110,6 +112,10 @@ export class GameComponent {
 
     const distOffset = (((xCoord - (this.image?.posX || 0)) ** 2) + ((yCoord - (this.image?.posY || 0)) ** 2)) ** 0.5
 
+    if (this.image)
+      if (xOffset > this.image?.width && yOffset > this.image?.height)
+        this.numOfErrors += 1;
+
     this.found(event, undefined, distOffset, xCoord, yCoord, xOffset, yOffset, this.image?.posX, this.image?.posY);
   }
 
@@ -157,6 +163,11 @@ export class GameComponent {
         find_pos: res.find_position
       }
 
+      let now = new Date();
+
+      this.extra['date'] = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+      this.extra['time'] = now.getMinutes() + 60 * now.getHours();
+
       if (res?.num_shapes != undefined) this.extra['num_shapes'] = res.num_shapes;
       if (res?.conjunction != undefined) this.extra['conjunction'] = res.conjunction;
       if (res?.target_color != undefined) this.extra['target_color'] = res.target_color;
@@ -193,6 +204,7 @@ export class GameComponent {
   }
 
   prepareItem(): void {
+    this.elapsedTime = 0;
     let image = document.getElementById('game_image');
     image?.setAttribute('src', `data:image/png;base64,${this.image?.file}`);
 
@@ -262,7 +274,13 @@ export class GameComponent {
         } else {
 
           if (textElement) {
-            textElement.textContent = `${parseInt(textElement.textContent || '0') - 1}`
+            let newCount = parseInt(textElement.textContent || '0') - 1;
+            if (newCount >= 0)
+              textElement.textContent = `${newCount}`;
+            else {
+              textElement.textContent = '';
+              textElement?.setAttribute('class', 'hidden');
+            }
           }
         }
       }, 750);

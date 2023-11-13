@@ -26,18 +26,21 @@ export class GameEndpointsService {
       'task_type': task_type,
       'user-ID': userID,
       'user-index': imageIndex,
-      'dist-offset': distOffset,
-      'xCoord': xCoord,
-      'yCoord': yCoord,
-      'present': present,
+      'target_to_click_offset': distOffset,
+      'click_x': xCoord,
+      'click_y': yCoord,
+      'selected_present_by_user': present,
+      'target_present': present && numOfErrors == 0 ? true : false,
       'num_shapes': extra.num_shapes,
       'conjunction': extra.conjunction,
       'target_color': extra.target_color,
       'target_shape': extra.target_shape,
       'x_offset': xOffset,
       'y_offset': yOffset,
-      'initial_x': targetPostX,
-      'initial_y': targetPosY
+      'target_x': targetPostX,
+      'target_y': targetPosY,
+      'date': extra.date,
+      'minutes_from_midnight': extra.time
     }, {headers: this.httpHeaders}).pipe(
       map((data: GameEntry) => data),
       catchError(this.handleError)
