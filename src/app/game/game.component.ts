@@ -33,6 +33,7 @@ export class GameComponent {
   started: boolean = false;
   running: boolean = false;
   ended: boolean = false;
+  paused: boolean = false;
 
   extra: any = {
     'date': '',
@@ -66,11 +67,18 @@ export class GameComponent {
     });
   }
 
-  pause(): void {
-    if (this.running) {
+  pause(resume: boolean = false): void {
+    this.paused = !resume;
+
+    let counterTextElement = document.getElementById('additional_text');
+    if (!resume && counterTextElement)
+      counterTextElement.textContent = 'Game is paused';
+
+    if (this.running || resume) {
       clearInterval(this.timer);
       this.running = false;
-      this.startCounter(30, true, "Game will resume in:");
+      if (resume)
+        this.startCounter(10, true, "Game will resume in:");
     }
   }
 

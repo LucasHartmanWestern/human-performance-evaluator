@@ -4,7 +4,7 @@
     <span id="additional_text"></span>
     <div class="game_window" id="window">
       <span id="game_text_display" [textContent]="ready ? 'Ready to Play?' : 'Complete Form to Play'"></span>
-      <img (click)="image?.find_pos ? image?.check_errors ? mistake() : getPos($event) : null" *ngIf="running" id="game_image">
+      <img (click)="image?.find_pos ? image?.check_errors ? mistake() : getPos($event) : null" *ngIf="running && !paused" id="game_image">
       <button (click)="found($event)" id="foundButton" *ngIf="running && image?.find_pos && image?.check_errors"></button>
     </div>
 
@@ -28,7 +28,7 @@
         <button (click)="begin()" [disabled]="!ready || started" *ngIf="!ended">Begin</button>
         <button (click)="restart()" [disabled]="!ready || started" *ngIf="ended">Restart</button>
         <button (click)="end()" [disabled]="!running">End</button>
-        <button (click)="pause()" id="pause" [disabled]="!running">Pause</button>
+        <button (click)="pause(paused)" id="pause" [disabled]="!running && !paused" [textContent]="paused ? 'Resume' : 'Pause'"></button>
       </div>
 
     </div>
@@ -39,7 +39,7 @@
       <div *ngIf="!image?.find_pos"><span><b>Item is Present</b>:</span><br><span>Left Arrow Key</span></div>
       <div *ngIf="!image?.find_pos"><span><b>Item is Absent</b>:</span><br><span>Right Arrow Key</span></div>
       <div *ngIf="image?.find_pos"><span><b>Select Item</b>:</span><br><span>Left Mouse Button</span></div>
-      <div><span><b>Pause</b>:</span><br><span>Spacebar</span></div>
+      <div><span><b [textContent]="paused ? 'Resume' : 'Pause'"></b>:</span><br><span>Spacebar</span></div>
     </div>
 
   </div>
